@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #svgcontainer{
+            width:400px;
+            height: auto;
+            margin:10vh auto;
+        }
+
+        #cirkel{
+            background: #999;
+            border-radius: 50%;
+            transform: rotate(-90deg);
+        }
+
+        .pie1{
+            stroke-width: 100;
+            stroke:#222;
+            fill:none;
+            stroke-dasharray:76 314;
+
+        }
+            .pie2{
+            stroke-width: 100;
+            stroke:#f00;
+            fill:none;
+            stroke-dasharray: 40 314;
+            stroke-dashoffset: -76;
+
+        }
+         .pie3{
+            stroke-width: 100;
+            stroke:#ca1;
+            fill:none;
+            stroke-dasharray: 80 314;
+            stroke-dashoffset: -114;
+
+        }
+    </style>
+
+</head>
+<body>
+    <div id="svgcontainer">
+    <svg id="cirkel" viewbox="0 0 100 100">
+       <circle class="pie1" r="50" cx="50" cy="50" />
+       <circle class="pie2" r="50" cx="50" cy="50" />
+       <circle class="pie3" r="50" cx="50" cy="50" />
+
+
+    </svg>
+    </div>
+</body>
+</html>
