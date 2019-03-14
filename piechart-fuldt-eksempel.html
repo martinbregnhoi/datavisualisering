@@ -48,7 +48,7 @@
 <body>
 
     <div>
-        <svg class="piechart">
+        <svg class="piechart" viewbox="0 0 200 200">
          <circle r="100" cx="100" cy="100" class="pie1" />
          <circle r="100" cx="100" cy="100" class="pie2" />
          <circle r="100" cx="100" cy="100" class="pie3" />
@@ -61,8 +61,9 @@
 
         let valueArray = [];
         let offsetArray = [0];
-        let omkreds = 632;
+        let omkreds = 200*Math.PI;
         let myData;
+
         async function hentJson() {
             let myJson = await fetch("pie.json");
             myData = await myJson.json();
