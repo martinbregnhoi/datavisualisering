@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        .container {
+            width: 50vw;
+        }
+
+        #barchart {
+            border: 1px solid #000;
+        }
+
+        #bgr line {
+            stroke: #333;
+            stroke-width: 0.5;
+        }
+
+        text {
+            font-size: 10px;
+        }
+
+        #bars line {
+            stroke-width: 20;
+            stroke: #ca1;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <svg id="barchart" viewbox="0 0 200 150">
+            <g id="bgr">
+               <text x="10" y="10">barchart</text>
+                <line x1="10" y1="40" x2="190" y2="40" />
+                <line x1="10" y1="90" x2="190" y2="90" />
+                <line x1="10" y1="140" x2="190" y2="140" />
+
+            </g>
+            <g id="bars">
+                <line x1="30" y1="140" x2="30" y2="20" />
+                <line x1="80" y1="140" x2="80" y2="30" />
+                <line x1="130" y1="140" x2="130" y2="50" />
+            </g>
+        </svg>
+
+    </div>
+    <script>
+        let values = [50, 100, 30];
+
+        let bars = document.querySelectorAll("#bars line");
+
+        bars.forEach((bar, i) => {
+
+            bar.setAttribute("y2", (140 - values[i]));
+
+
+        })
+
+    </script>
+</body>
+
+</html>
