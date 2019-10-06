@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dynamisk søjlediagram</title>
+    <style>
+        #svgcontainer {
+            width: 50%;
+            min-width: 400px;
+            margin: 0 auto;
+            border: 1px solid #666;
+            /*            background: url(mur.jpg);*/
+            background-size: cover;
+        }
+
+        #bars line {
+            stroke: #ca1;
+            stroke-width: 10;
+            stroke-dasharray: 300;
+            stroke-dashoffset: 300;
+            transition: all 2s ease;
+        }
+
+        #bgr line {
+            stroke: #000;
+            stroke-width: 0.5;
+        }
+
+        #bgr text {
+            font-family: monospace, sans-serif;
+            fill: #000;
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="svgcontainer">
+        <svg viewBox="-25 -25 225 150">
+            <g id="bars">
+                <line x1="15" y1="100" x2="15" y2="0" />
+                <line x1="45" y1="100" x2="45" y2="0" />
+                <line x1="75" y1="100" x2="75" y2="0" />
+                <line x1="105" y1="100" x2="105" y2="0" />
+                <line x1="135" y1="100" x2="135" y2="0" />
+                <line x1="165" y1="100" x2="165" y2="0" />
+                <!-- If you do not specify the stroke
+             color the line will not be visible -->
+            </g>
+            <g id="bgr">
+                <!--y akse -->
+                <line x1="0" y1="100" x2="180" y2="100" />
+                <line x1="0" y1="80" x2="180" y2="80" />
+                <line x1="0" y1="60" x2="180" y2="60" />
+                <line x1="0" y1="40" x2="180" y2="40" />
+                <line x1="0" y1="20" x2="180" y2="20" />
+                <line x1="0" y1="0" x2="180" y2="0" />
+
+                <text x="-10" y="100">0</text>
+                <text x="-15" y="80">20</text>
+                <text x="-15" y="60">40</text>
+                <text x="-15" y="40">60</text>
+                <text x="-15" y="20">80</text>
+                <text x="-20" y="0">100</text>
+
+                <!--x akse -->
+                <line x1="0" y1="100" x2="0" y2="0" />
+                <line x1="30" y1="100" x2="30" y2="93" />
+                <line x1="60" y1="100" x2="60" y2="93" />
+                <line x1="90" y1="100" x2="90" y2="93" />
+                <line x1="120" y1="100" x2="120" y2="93" />
+                <line x1="150" y1="100" x2="150" y2="93" />
+                <line x1="180" y1="100" x2="180" y2="93" />
+
+                <text x="5" y="110">jan</text>
+                <text x="35" y="110">feb</text>
+                <text x="65" y="110">mar</text>
+                <text x="95" y="110">apr</text>
+                <text x="125" y="110">maj</text>
+                <text x="155" y="110">jun</text>
+
+            </g>
+        </svg>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", loadJson);
+
+        let values;
+
+        async function loadJson() {
+
+            const myJson = await fetch("graphData.json");
+            values = await myJson.json();
+            animate();
+        }
+
+        function animate() {
+
+            document.querySelectorAll("#bars line").forEach((e, i) => {
+                e.style.strokeDashoffset = 0;
+                e.setAttribute("y2", 100 - values[i].number);
+                e.setAttribute("data-value", values[i].number);
+
+            })
+
+        }
+
+        document.querySelector("#bars").addEventListener("mouseover", e => {
+
+            let valgt = e.target.getAttribute("data-value");
+            if (valgt) {
+                console.log(valgt);
+            }
+        });
+    </script>
+</body></html>

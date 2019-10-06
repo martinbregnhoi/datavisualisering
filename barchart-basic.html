@@ -14,16 +14,16 @@
             border: 1px solid #000;
         }
 
-        .line {
+        #bgr line {
             stroke: #333;
-            stroke-width: 1;
+            stroke-width: 0.5;
         }
 
         text {
-            font-size: 5px;
+            font-size: 10px;
         }
 
-        .bar {
+        #bars line {
             stroke-width: 20;
             stroke: #ca1;
         }
@@ -33,29 +33,30 @@
 
 <body>
     <div class="container">
-        <svg id="barchart" viewbox="0 0 200 200">
-            <g>
-                <line class="line" x1="10" y1="20" x2="190" y2="20" />
-                <line class="line" x1="10" y1="100" x2="190" y2="100" />
-                <line class="line" x1="10" y1="190" x2="190" y2="190" />
-                <text x="10" y="10">barchart</text>
+        <svg id="barchart" viewbox="0 0 200 150">
+            <g id="bgr">
+               <text x="10" y="10">barchart</text>
+                <line x1="10" y1="40" x2="190" y2="40" />
+                <line x1="10" y1="90" x2="190" y2="90" />
+                <line x1="10" y1="140" x2="190" y2="140" />
+
             </g>
-            <g class="bars">
-                <line class="bar" x1="30" y1="190" x2="30" y2="20" />
-                <line class="bar" x1="80" y1="190" x2="80" y2="30" />
-                <line class="bar" x1="130" y1="190" x2="130" y2="50" />
+            <g id="bars">
+                <line x1="30" y1="140" x2="30" y2="20" />
+                <line x1="80" y1="140" x2="80" y2="30" />
+                <line x1="130" y1="140" x2="130" y2="50" />
             </g>
         </svg>
 
     </div>
     <script>
-        let values = [50, 80, 30];
+        let values = [50, 100, 30];
 
-        let bars = document.querySelectorAll(".bar");
+        let bars = document.querySelectorAll("#bars line");
 
         bars.forEach((bar, i) => {
 
-            bar.setAttribute("y2", (200 - (1.80 * values[i])));
+            bar.setAttribute("y2", (140 - values[i]));
 
 
         })

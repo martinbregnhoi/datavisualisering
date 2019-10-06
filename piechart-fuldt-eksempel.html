@@ -63,6 +63,7 @@
         let offsetArray = [0];
         let omkreds = 200*Math.PI;
         let myData;
+        let dataArray = [];
 
         async function hentJson() {
             let myJson = await fetch("pie.json");
@@ -73,9 +74,12 @@
 
         function lavArray() {
             myData.forEach(data => {
-
-                offsetArray.push(data.value + offsetArray[offsetArray.length - 1]);
-                valueArray.push(data.value);
+                //console.log(data.value)
+                let tilProcent = data.value*omkreds/100;
+                //console.log(tilProcent);
+                offsetArray.push(tilProcent + offsetArray[offsetArray.length - 1]);
+                valueArray.push(tilProcent);
+                dataArray.push(data.value);
 
 
 
@@ -91,7 +95,7 @@
             document.querySelectorAll(".piechart circle").forEach( (pie,i) =>{
                 pie.style.strokeDasharray = valueArray[i] + " " + omkreds;
                 pie.style.strokeDashoffset = -offsetArray[i];
-                pie.setAttribute("data-value",valueArray[i]);
+                pie.setAttribute("data-value",dataArray[i]);
                // console.log(pie);
             });
 
@@ -102,7 +106,7 @@
 
               let valgt = e.target.getAttribute("data-value");
             if(valgt){
-            console.log(valgt);
+            console.log("procent er:",valgt);
                 }
         });
 
