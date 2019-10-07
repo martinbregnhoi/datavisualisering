@@ -26,6 +26,10 @@
         #bars line {
             stroke-width: 20;
             stroke: #ca1;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            transition: all 2s ease;
+
         }
 
     </style>
@@ -42,25 +46,32 @@
 
             </g>
             <g id="bars">
-                <line x1="30" y1="140" x2="30" y2="20" />
-                <line x1="80" y1="140" x2="80" y2="30" />
-                <line x1="130" y1="140" x2="130" y2="50" />
+                <line x1="30" y1="140" x2="30" y2="40" />
+                <line x1="80" y1="140" x2="80" y2="40" />
+                <line x1="130" y1="140" x2="130" y2="40" />
             </g>
         </svg>
 
     </div>
     <script>
-        let values = [50, 100, 30];
+        window.addEventListener("load", animer);
+
+        let values = [50, 80, 30];
+
+        function animer(){
 
         let bars = document.querySelectorAll("#bars line");
 
         bars.forEach((bar, i) => {
-
+            console.log(bar);
+            bar.style.strokeDashoffset = 0;
             bar.setAttribute("y2", (140 - values[i]));
 
 
         })
 
+
+}
     </script>
 </body>
 

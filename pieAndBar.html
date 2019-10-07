@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pie and Bar</title>
+    <style>
+        :root{
+            --omkr:calc(100*22/7);
+            --pie1:calc(var(--omkr)*.33);
+            --pie2:calc(var(--omkr)*.50);
+            --pie3:calc(var(--omkr)*.27);
+        }
+        #piechart{
+            border:1px solid #333;
+            width:50vw;
+            transform: rotate(-90deg);
+            border-radius: 50%;
+        }
+         #barchart{
+            border:1px solid #333;
+            width:50vw;
+
+        }
+        .pie1{
+            stroke:#f00;
+            stroke-width:100;
+            fill:none;
+            stroke-dasharray: var(--pie1) var(--omkr);
+        }
+        .pie2{
+            stroke:#ca1;
+            stroke-width:100;
+            fill:none;
+            stroke-dasharray: var(--pie2) var(--omkr);
+            stroke-dashoffset:calc(var(--pie1)*-1);
+        }
+         .pie3{
+            stroke:#123;
+            stroke-width:100;
+            fill:none;
+            stroke-dasharray: var(--pie3) var(--omkr);
+            stroke-dashoffset:calc(calc(var(--omkr)*.50)+calc(var(--omkr)*.33)*-1);
+        }
+        line{
+            stroke:#ca1;
+            stroke-width:10;
+        }
+        .bgr line{
+            stroke:#333;
+            stroke-width:1;
+        }
+
+    </style>
+</head>
+<body>
+    <svg id="piechart" viewbox="0 0 100 100">
+        <circle class="pie1" r="50" cx="50" cy="50" />
+        <circle class="pie2" r="50" cx="50" cy="50" />
+        <circle class="pie3" r="50" cx="50" cy="50" />
+    </svg>
+     <svg id="barchart" viewbox="-10 -10 200 120">
+        <line x1="10" y1="100" x2="10" y2="0"/>
+        <g class="bgr">
+        <line x1="0" y1="100" x2="180" y2="100"/>
+        </g>
+    </svg>
+</body>
+</html>
