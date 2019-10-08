@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tirsdagsbar</title>
+
+    <style>
+        #barchart {
+            background: url(mur.jpg);
+            background-size: cover;
+            border: 1px solid #333;
+        }
+
+        .bgr line {
+            stroke: #fff;
+            stroke-width: 1;
+        }
+
+        .bars line {
+            stroke: #ca1;
+            stroke-width: 10;
+            opacity: .8;
+        }
+
+        text {
+            fill: #fff;
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <svg id="barchart" viewbox="-20 -10 220 150">
+        <g class="bgr">
+            <text x="-18" y="5">100</text>
+            <text x="-13" y="50">50</text>
+            <text x="-8" y="100">0</text>
+            <text x="5" y="110">jan</text>
+            <text x="35" y="110">feb</text>
+            <text x="65" y="110">mar</text>
+            <text x="95" y="110">apr</text>
+            <text x="125" y="110">maj</text>
+            <text x="155" y="110">jun</text>
+            <line x1="0" y1="100" x2="0" y2="0" />
+            <line x1="0" y1="100" x2="180" y2="100" />
+            <line x1="0" y1="50" x2="180" y2="50" />
+            <line x1="0" y1="0" x2="180" y2="0" />
+        </g>
+        <g class="bars">
+            <line x1="10" y1="100" x2="10" y2="0" />
+            <line x1="40" y1="100" x2="40" y2="0" />
+            <line x1="70" y1="100" x2="70" y2="0" />
+            <line x1="100" y1="100" x2="100" y2="0" />
+            <line x1="130" y1="100" x2="130" y2="0" />
+            <line x1="160" y1="100" x2="160" y2="0" />
+
+        </g>
+    </svg>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", getJson);
+
+        //let jsonData;
+        let myValues;
+
+
+        async function getJson(){
+            let myJson = await fetch("myValues.json");
+            myValues = await myJson.json();
+    console.log(myValues);
+
+        }
+
+
+    function setValues(){
+
+        document.querySelectorAll(".bars line").forEach((bar,i)=>{
+
+            //console.log(i);
+            bar.setAttribute("y2", 100 - myValues[i] );
+        })
+    }
+
+
+
+    </script>
+</body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TirsdagsPie</title>
+    <style>
+        #piechart {
+            border: 2px solid #333;
+            transform: rotate(-90deg);
+            border-radius: 50%;
+        }
+
+        .pie1 {
+            stroke: #000;
+            stroke-width: 100;
+            fill: none;
+            stroke-dashArray: 10 calc(100*22/7);
+            /*            transition: all 1s ease;*/
+        }
+
+        .pie2 {
+            stroke: #f00;
+            stroke-width: 100;
+            fill: none;
+            stroke-dashArray: 10 calc(100*22/7);
+            stroke-dashOffset: -10;
+            /*            transition: all 1s ease;*/
+        }
+
+        .pie3 {
+            stroke: #ca1;
+            stroke-width: 100;
+            fill: none;
+            stroke-dashArray: 10 calc(100*22/7);
+            stroke-dashOffset: -20;
+            /*            transition: all 1s ease;*/
+        }
+    </style>
+
+</head>
+
+<body>
+    <svg id="piechart" viewbox="0 0 100 100">
+
+        <circle class="pie1" r="50" cx="50" cy="50" />
+        <circle class="pie2" r="50" cx="50" cy="50" />
+        <circle class="pie3" r="50" cx="50" cy="50" />
+
+    </svg>
+
+    <script>
+        const omkreds = 100 * Math.PI;
+        let total = 0;
+        let faktor;
+        let myValues = [20, 50, 50];
+        let offsetArray = [0];
+
+        window.addEventListener("load", getValues);
+
+        function getValues() {
+            myValues.forEach((tal, i) => {
+                //her udregnes summen af værdierne i myValues
+                total += myValues[i];
+                //i offsetArray indsættes de værdier piestykkerne skal rykkes medfor ikke at overlappe
+                offsetArray.push(tal + offsetArray[offsetArray.length - 1]);
+
+                console.log(offsetArray);
+            })
+            //faktor er det tal værdierne i myValues skal ganges med for at få deres andel af omkredsen
+            faktor = omkreds / total;
+
+            drawPie();
+        }
+
+
+        function drawPie() {
+
+            document.querySelectorAll("circle").forEach((pie, i) => {
+                //værdierne for stroke-dashArray indsættes på de enkelte stykker
+                pie.style.strokeDasharray = myValues[i] * faktor + " " + omkreds;
+                //stykkerne rykkes med værdierne fra offsetArray
+                pie.style.strokeDashoffset = -offsetArray[i] * faktor;
+            })
+
+        }
+    </script>
+</body></html>
